@@ -16,7 +16,7 @@ public class Application {
 
     public static void main(String... args) throws IOException {
         SmartHome smartHome = smartHomeLoader.loadSmartHome();
-        runEventsCycle(smartHome);
+        runEventsCycle(smartHome);  // HW
     }
 
     private static void runEventsCycle(SmartHome smartHome) {

@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SmartHome {
+public class SmartHome implements Executable {
     Collection<Room> rooms;
 
     public SmartHome() {
@@ -30,6 +30,13 @@ public class SmartHome {
                 SensorCommandExecutor.executeCommand(command);
             }
         }
+    }
+
+    @Override
+    public void execute(Action action) {
+        action.executeAction(this);
+        for (Room room : this.getRooms())
+            action.executeAction(room);
     }
 
 }

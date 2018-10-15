@@ -2,7 +2,7 @@ package ru.sbt.mipt.oop;
 
 import java.util.Collection;
 
-public class Room {
+public class Room implements Executable {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;
@@ -28,4 +28,17 @@ public class Room {
     public Light getLightById(String objectId) {
         return null;
     }
+
+
+    @Override
+    public void execute(Action action) {
+        action.executeAction(this);
+        for (Door door : this.getDoors())
+            action.executeAction(door);
+        for (Light light : this.getLights())
+            action.executeAction(light);
+    }
+
 }
+
+
