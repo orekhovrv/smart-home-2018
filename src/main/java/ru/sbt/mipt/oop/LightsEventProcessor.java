@@ -8,6 +8,16 @@ import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 public class LightsEventProcessor implements EventProcessor {
     public void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isLightEvent(event)) return;
+        for (Room room : smartHome.getRooms()) {
+            Light light = room.getLightById(event.getObjectId());
+            if (event.getType() == LIGHT_ON) {
+                light.setOn(true);
+                System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
+            } else {
+                light.setOn(false);
+                System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned off.");
+            }
+        }
 
 //        smartHome.execute(object -> {
 //            if (object instanceof Room) {
@@ -22,17 +32,6 @@ public class LightsEventProcessor implements EventProcessor {
 //                }
 //            }
 //        });
-
-        for (Room room : smartHome.getRooms()) {
-            Light light = room.getLightById(event.getObjectId());
-            if (event.getType() == LIGHT_ON) {
-                light.setOn(true);
-                System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
-            } else {
-                light.setOn(false);
-                System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned off.");
-            }
-        }
     }
 
     private boolean isLightEvent(SensorEvent event) {

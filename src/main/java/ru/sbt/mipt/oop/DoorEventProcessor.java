@@ -8,6 +8,17 @@ public class DoorEventProcessor implements EventProcessor {
     public void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isDoorEvent(event)) return;
         // событие от двери
+        for (Room room : smartHome.getRooms()) {
+            for (Door door : room.getDoors()) {
+                if (door.getId().equals(event.getObjectId())) {
+                    if (event.getType() == DOOR_OPEN) {
+                        changeDoorState(room, door, true, " was opened.");
+                    } else {
+                        changeDoorState(room, door, false, " was closed.");
+                    }
+                }
+            }
+        }
 
 //        smartHome.execute(object -> {
 //            if (object instanceof Room) {
@@ -24,18 +35,6 @@ public class DoorEventProcessor implements EventProcessor {
 //                }
 //            }
 //        });
-
-        for (Room room : smartHome.getRooms()) {
-            for (Door door : room.getDoors()) {
-                if (door.getId().equals(event.getObjectId())) {
-                    if (event.getType() == DOOR_OPEN) {
-                        changeDoorState(room, door, true, " was opened.");
-                    } else {
-                        changeDoorState(room, door, false, " was closed.");
-                    }
-                }
-            }
-        }
     }
 
     private void changeDoorState(Room room, Door door, boolean opened, String s) {
