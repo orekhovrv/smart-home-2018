@@ -26,6 +26,9 @@ public class Room implements Executable {
     }
 
     public Light getLightById(String objectId) {
+        for (Light light : lights) {                            //  my code
+            if (objectId.equals(light.getId())) return light;   //
+        }                                                       //
         return null;
     }
 

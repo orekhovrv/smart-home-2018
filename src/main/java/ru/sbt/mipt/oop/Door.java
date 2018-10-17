@@ -3,10 +3,18 @@ package ru.sbt.mipt.oop;
 public class Door implements Executable {
     private final String id;
     private boolean isOpen;
+    private String roomName;      // my code
 
-    public Door(boolean isOpen, String id) {
+
+
+    public Door(boolean isOpen, String id, String roomName) {
         this.isOpen = isOpen;
         this.id = id;
+        this.roomName = roomName;       //my code
+    }
+
+    public String getRoomName() {       // my code
+        return roomName;
     }
 
     public String getId() {
