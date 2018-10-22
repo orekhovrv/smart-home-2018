@@ -36,7 +36,7 @@ public class SmartHome implements Executable {
     public void execute(Action action) {
         action.executeAction(this);
         for (Room room : this.getRooms())
-            action.executeAction(room);
+            room.execute(action);
     }
 
 }

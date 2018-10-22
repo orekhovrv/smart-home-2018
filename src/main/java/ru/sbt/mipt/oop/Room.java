@@ -37,9 +37,9 @@ public class Room implements Executable {
     public void execute(Action action) {
         action.executeAction(this);
         for (Door door : this.getDoors())
-            action.executeAction(door);
+            door.execute(action);
         for (Light light : this.getLights())
-            action.executeAction(light);
+            light.execute(action);
     }
 
 }
