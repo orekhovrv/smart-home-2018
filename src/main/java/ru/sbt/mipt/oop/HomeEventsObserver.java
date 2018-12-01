@@ -9,6 +9,7 @@ public class HomeEventsObserver {
         eventProcessors.add(new LightsEventProcessor());
         eventProcessors.add(new DoorEventProcessor());
         eventProcessors.add(new HallDoorEventProcessor());
+        eventProcessors.add(new AlarmEventProcessor());
         return eventProcessors;
     }
 

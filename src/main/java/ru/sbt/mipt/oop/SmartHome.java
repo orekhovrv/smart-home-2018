@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SmartHome implements Executable {
-    Collection<Room> rooms;
+
+    Alarm alarm;
+   private  Collection<Room> rooms;
 
     public SmartHome() {
         rooms = new ArrayList<>();
@@ -23,13 +25,14 @@ public class SmartHome implements Executable {
     }
 
     public void turnOffLights() {
-        for (Room homeRoom : getRooms()) {
-            for (Light light : homeRoom.getLights()) {
+        this.execute(object -> {
+            if (object instanceof Light) {
+                Light light = (Light) object;
                 light.setOn(false);
                 SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
                 SensorCommandExecutor.executeCommand(command);
             }
-        }
+        });
     }
 
     @Override
