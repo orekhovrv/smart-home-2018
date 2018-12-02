@@ -1,9 +1,12 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.EventService.EventProcessors;
 
-import java.util.Collection;
+import ru.sbt.mipt.oop.Components.Light;
+import ru.sbt.mipt.oop.Components.Room;
+import ru.sbt.mipt.oop.EventService.SensorEvent;
+import ru.sbt.mipt.oop.Components.SmartHome;
 
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
+import static ru.sbt.mipt.oop.EventService.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.EventService.SensorEventType.LIGHT_ON;
 
 public class LightsEventProcessor implements EventProcessor {
     @Override

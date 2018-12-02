@@ -1,4 +1,8 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.EventService;
+
+import ru.sbt.mipt.oop.Application;
+import ru.sbt.mipt.oop.EventService.EventProcessors.*;
+import ru.sbt.mipt.oop.Components.SmartHome;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,12 +30,12 @@ public class HomeEventsObserver implements EventsManager {
         Collection<EventProcessor> eventProcessors = this.configureEventProcessors();
         while (event != null) {
             System.out.println("Got event: " + event);
-            if (!smartHome.getAlarm().getBehavior().isIgnoringEvents()) {
+            if (!smartHome.getAlarmEntity().getBehavior().isIgnoringEvents()) {
                 for (EventProcessor eventProcessor : eventProcessors) {
                     eventProcessor.processEvent(smartHome, event);
                 }
             } else {
-                smartHome.getAlarm().getBehavior().sendSMS();
+                smartHome.getAlarmEntity().getBehavior().sendSMS();
             }
             event = RandomSensorEventProvider.getNextSensorEvent();
         }

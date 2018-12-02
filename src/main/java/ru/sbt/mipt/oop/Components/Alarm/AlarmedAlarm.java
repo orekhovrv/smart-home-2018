@@ -1,4 +1,6 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.Components.Alarm;
+
+import ru.sbt.mipt.oop.Components.SmartHome;
 
 public class AlarmedAlarm extends AlarmBehavior {
 

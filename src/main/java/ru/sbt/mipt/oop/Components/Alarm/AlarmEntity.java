@@ -1,6 +1,6 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.Components.Alarm;
 
-public class Alarm {
+public class AlarmEntity {
     private AlarmStatus status;
     private String code = "code";
     private AlarmBehavior behavior;
@@ -8,7 +8,7 @@ public class Alarm {
     private AlarmBehavior alarmedAlarm;
     private AlarmBehavior activatedAlarm;
 
-    public Alarm(String code) {
+    public AlarmEntity(String code) {
         this.code = code;
         this.deactivatedAlarm = new DeactivatedAlarm();
         this.alarmedAlarm = new AlarmedAlarm();
@@ -21,7 +21,7 @@ public class Alarm {
         return behavior;
     }
 
-    boolean activate(String code) {
+    public boolean activate(String code) {
         if (code.equals(this.code)) {
             this.status = AlarmStatus.ACTIVATED;
             behavior = activatedAlarm;
@@ -32,7 +32,7 @@ public class Alarm {
         }
     }
 
-    boolean deactivate(String code) {
+    public boolean deactivate(String code) {
         if (code.equals(this.code)) {
             this.status = AlarmStatus.DEACTIVATED;
             behavior = deactivatedAlarm;
@@ -46,7 +46,7 @@ public class Alarm {
     void alarming() {
         this.status = AlarmStatus.ALARM;
         behavior = alarmedAlarm;
-        System.out.println("Alarm is alarming!!!");
+        System.out.println("AlarmEntity is alarming!!!");
     }
 
     public AlarmStatus getStatus() {

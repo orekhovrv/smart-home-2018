@@ -1,4 +1,7 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.Components;
+
+import ru.sbt.mipt.oop.Action;
+import ru.sbt.mipt.oop.Executable;
 
 import java.util.Collection;
 

@@ -1,11 +1,16 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.Components;
+
+import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.Components.Alarm.AlarmEntity;
+import ru.sbt.mipt.oop.Components.Light;
+import ru.sbt.mipt.oop.Components.Room;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class SmartHome implements Executable {
 
-    private Alarm alarm;
+    private AlarmEntity alarmEntity;
     private  Collection<Room> rooms;
 
     public SmartHome() {
@@ -16,9 +21,9 @@ public class SmartHome implements Executable {
         this.rooms = rooms;
     }
 
-    public SmartHome(Collection<Room> rooms, Alarm alarm) {
+    public SmartHome(Collection<Room> rooms, AlarmEntity alarmEntity) {
         this.rooms = rooms;
-        this.alarm = alarm;
+        this.alarmEntity = alarmEntity;
     }
 
     public void addRoom(Room room) {
@@ -29,9 +34,9 @@ public class SmartHome implements Executable {
         return rooms;
     }
 
-    public Alarm getAlarm() { return alarm; }
+    public AlarmEntity getAlarmEntity() { return alarmEntity; }
 
-    public void setAlarm(Alarm alarm) { this.alarm = alarm; }
+    public void setAlarmEntity(AlarmEntity alarmEntity) { this.alarmEntity = alarmEntity; }
 
     public void turnOffLights() {
         this.execute(object -> {
