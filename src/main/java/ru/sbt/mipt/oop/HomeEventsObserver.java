@@ -9,6 +9,7 @@ public class HomeEventsObserver {
         eventProcessors.add(new LightsEventProcessor());
         eventProcessors.add(new DoorEventProcessor());
         eventProcessors.add(new HallDoorEventProcessor());
+        eventProcessors.add(new AlarmEventProcessor(Application.getUserAlarmCode()));
         return eventProcessors;
     }
 
@@ -17,8 +18,12 @@ public class HomeEventsObserver {
         Collection<EventProcessor> eventProcessors = this.configureEventProcessors();
         while (event != null) {
             System.out.println("Got event: " + event);
-            for (EventProcessor eventProcessor : eventProcessors) {
-                eventProcessor.processEvent(smartHome, event);
+            if (!smartHome.getAlarm().getBehavior().isIgnoringEvents()) {
+                for (EventProcessor eventProcessor : eventProcessors) {
+                    eventProcessor.processEvent(smartHome, event);
+                }
+            } else {
+                smartHome.getAlarm().getBehavior().sendSMS();
             }
             event = RandomSensorEventProvider.getNextSensorEvent();
         }

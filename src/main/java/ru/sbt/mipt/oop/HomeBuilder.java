@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 public class HomeBuilder {
 
@@ -25,7 +26,13 @@ public class HomeBuilder {
         Room hall = new Room(Arrays.asList(new Light("7", false), new Light("8", false), new Light("9", false)),
                 Arrays.asList(new Door(false, "4", "hall")),
                 "hall");
-        SmartHome smartHome = new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall));
+        List<Room> rooms = Arrays.asList(kitchen, bathroom, bedroom, hall);
+
+//        Alarm alarm = new Alarm("code");
+
+//        SmartHome smartHome = new SmartHome(rooms, alarm);
+
+        SmartHome smartHome = new SmartHome(rooms);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(smartHome);
         System.out.println(jsonString);
