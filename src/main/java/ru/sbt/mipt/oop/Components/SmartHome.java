@@ -38,11 +38,11 @@ public class SmartHome implements Executable {
 
     public void setAlarmEntity(AlarmEntity alarmEntity) { this.alarmEntity = alarmEntity; }
 
-    public void turnOffLights() {
+    public void turnLights(boolean position) {
         this.execute(object -> {
             if (object instanceof Light) {
                 Light light = (Light) object;
-                light.setOn(false);
+                light.setOn(position);
                 SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
                 SensorCommandExecutor.executeCommand(command);
             }

@@ -6,10 +6,16 @@ import ru.sbt.mipt.oop.Executable;
 public class Light implements Executable {
     private boolean isOn;
     private final String id;
+    private String roomName;
 
-    public Light(String id, boolean isOn) {
+    public Light(String id, boolean isOn, String roomName) {
         this.id = id;
         this.isOn = isOn;
+        this.roomName = roomName;
+    }
+
+    public String getRoomName() {       // my code
+        return roomName;
     }
 
     public boolean isOn() {
