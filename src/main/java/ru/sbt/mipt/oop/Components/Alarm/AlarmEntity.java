@@ -43,7 +43,7 @@ public class AlarmEntity {
         }
     }
 
-    void alarming() {
+    public void alarming() {
         this.status = AlarmStatus.ALARM;
         behavior = alarmedAlarm;
         System.out.println("AlarmEntity is alarming!!!");

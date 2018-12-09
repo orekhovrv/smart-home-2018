@@ -1,6 +1,6 @@
-package ru.sbt.mipt.oop.RemoteControl;
+package ru.sbt.mipt.oop.Components.RemoteControl;
 
-import ru.sbt.mipt.oop.RemoteControl.Commands.Command;
+import ru.sbt.mipt.oop.Components.RemoteControl.Commands.Command;
 
 import java.util.HashMap;
 import java.util.Map;

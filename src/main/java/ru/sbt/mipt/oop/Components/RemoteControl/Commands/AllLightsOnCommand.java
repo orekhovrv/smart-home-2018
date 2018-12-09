@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.RemoteControl.Commands;
+package ru.sbt.mipt.oop.Components.RemoteControl.Commands;
 
 
 import ru.sbt.mipt.oop.Components.SmartHome;

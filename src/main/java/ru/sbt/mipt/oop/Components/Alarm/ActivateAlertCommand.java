@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.Components.Alarm;
 
 import ru.sbt.mipt.oop.Components.SmartHome;
-import ru.sbt.mipt.oop.RemoteControl.Commands.Command;
+import ru.sbt.mipt.oop.Components.RemoteControl.Commands.Command;
 
 
 public class ActivateAlertCommand implements Command {
