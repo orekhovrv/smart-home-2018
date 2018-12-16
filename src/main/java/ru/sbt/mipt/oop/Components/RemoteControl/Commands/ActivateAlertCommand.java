@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.Components.Alarm;
+package ru.sbt.mipt.oop.Components.RemoteControl.Commands;
 
 import ru.sbt.mipt.oop.Components.SmartHome;
 import ru.sbt.mipt.oop.Components.RemoteControl.Commands.Command;

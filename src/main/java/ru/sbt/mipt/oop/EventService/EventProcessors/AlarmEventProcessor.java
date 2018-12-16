@@ -32,7 +32,7 @@ public class AlarmEventProcessor implements EventProcessor {
                 }
             }
         } else {
-            smartHome.getAlarmEntity().getBehavior().gotNotAlarmEvent(smartHome);
+            smartHome.getAlarmEntity().gotNotAlarmEvent(smartHome);
         }
 
     }

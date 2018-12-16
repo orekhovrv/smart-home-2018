@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop.Components.Alarm;
 
+import ru.sbt.mipt.oop.Components.SmartHome;
+
 public class AlarmEntity {
     private AlarmStatus status;
     private String code = "code";
@@ -52,4 +54,10 @@ public class AlarmEntity {
     public AlarmStatus getStatus() {
         return status;
     }
+
+    public void gotNotAlarmEvent(SmartHome smartHome) { behavior.gotNotAlarmEvent(smartHome); }
+
+    public boolean isIgnoringEvents() { return behavior.isIgnoringEvents(); }
+
+    public void sendSMS() { behavior.sendSMS(); }
 }

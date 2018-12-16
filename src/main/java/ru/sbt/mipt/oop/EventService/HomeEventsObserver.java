@@ -30,12 +30,12 @@ public class HomeEventsObserver implements EventsManager {
         Collection<EventProcessor> eventProcessors = this.configureEventProcessors();
         while (event != null) {
             System.out.println("Got event: " + event);
-            if (!smartHome.getAlarmEntity().getBehavior().isIgnoringEvents()) {
+            if (!smartHome.getAlarmEntity().isIgnoringEvents()) {
                 for (EventProcessor eventProcessor : eventProcessors) {
                     eventProcessor.processEvent(smartHome, event);
                 }
             } else {
-                smartHome.getAlarmEntity().getBehavior().sendSMS();
+                smartHome.getAlarmEntity().sendSMS();
             }
             event = RandomSensorEventProvider.getNextSensorEvent();
         }
