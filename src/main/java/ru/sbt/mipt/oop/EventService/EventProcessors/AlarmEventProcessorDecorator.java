@@ -20,7 +20,7 @@ public class AlarmEventProcessorDecorator implements EventProcessor {
 
     @Override
     public void processEvent(SmartHome smartHome, SensorEvent event) {
-        if (event.getType().isAlarmEvent()) {
+        if (smartHome.getAlarmEntity() != null && event.getType().isAlarmEvent()) {
             if (event.getType() == ALARM_DEACTIVATE) {
                 boolean wasDeactivated = smartHome.getAlarmEntity().deactivate(userAlarmCode);
                 if (wasDeactivated) {
@@ -38,7 +38,7 @@ public class AlarmEventProcessorDecorator implements EventProcessor {
                 }
             }
         } else {
-            if (smartHome.getAlarmEntity().isActivated()) {
+            if (smartHome.getAlarmEntity() != null && smartHome.getAlarmEntity().isActivated()) {
                 smartHome.getAlarmEntity().alarming();
                 smartHome.getAlarmEntity().sendSMS();
             } else {

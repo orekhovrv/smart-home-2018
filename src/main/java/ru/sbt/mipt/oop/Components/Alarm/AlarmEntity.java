@@ -23,7 +23,7 @@ public class AlarmEntity {
     }
 
     public boolean deactivate(String code) {
-        return behavior.activate(code);
+        return behavior.deactivate(code);
     }
 
     public void alarming() {

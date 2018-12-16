@@ -26,7 +26,7 @@ public class HomeEventsObserver implements EventsManager {
     @Override
     public void runEventsCycle(SmartHome smartHome) {
         SensorEvent event = RandomSensorEventProvider.getNextSensorEvent();
-        Collection<EventProcessor> eventProcessors = this.configureEventProcessors();
+        eventProcessors.addAll(this.configureEventProcessors());
         while (event != null) {
             System.out.println("Got event: " + event);
             for (EventProcessor eventProcessor : eventProcessors) {
