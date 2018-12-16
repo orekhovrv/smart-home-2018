@@ -1,17 +1,24 @@
 package ru.sbt.mipt.oop.Components.Alarm;
 
-import ru.sbt.mipt.oop.Components.SmartHome;
 
 public class AlarmedAlarm extends AlarmBehavior {
 
-    @Override
-    public boolean isIgnoringEvents() {
-        return true;
+    private AlarmEntity alarm;
+    private String code;
+
+    public AlarmedAlarm(AlarmEntity alarm, String code) {
+        this.alarm = alarm;
+        this.code = code;
     }
 
     @Override
-    public void gotNotAlarmEvent(SmartHome smartHome) {
-        sendSMS();
+    public boolean deactivate(String code) {
+        if (code.equals(this.code)) {
+            alarm.setStatus(AlarmStatus.DEACTIVATED);
+            alarm.setBehavior(new DeactivatedAlarm(alarm ,code));
+            return true;
+        } else {
+            return false;
+        }
     }
-
 }

@@ -1,16 +1,22 @@
 package ru.sbt.mipt.oop.EventService.EventProcessors;
 
+import ru.sbt.mipt.oop.Application;
 import ru.sbt.mipt.oop.EventService.SensorEvent;
 import ru.sbt.mipt.oop.Components.SmartHome;
 
 import static ru.sbt.mipt.oop.EventService.SensorEventType.ALARM_ACTIVATE;
 import static ru.sbt.mipt.oop.EventService.SensorEventType.ALARM_DEACTIVATE;
 
-public class AlarmEventProcessor implements EventProcessor {
-
-    public AlarmEventProcessor(String userAlarmCode) { this.userAlarmCode = userAlarmCode; }
+public class AlarmEventProcessorDecorator implements EventProcessor {
 
     private String userAlarmCode;
+    private EventProcessor wrapeeProcessor;
+
+    public AlarmEventProcessorDecorator(EventProcessor wrapeeProcessor) {
+        this.userAlarmCode = Application.getUserAlarmCode();
+        this.wrapeeProcessor = wrapeeProcessor;
+    }
+
 
     @Override
     public void processEvent(SmartHome smartHome, SensorEvent event) {
@@ -32,9 +38,13 @@ public class AlarmEventProcessor implements EventProcessor {
                 }
             }
         } else {
-            smartHome.getAlarmEntity().gotNotAlarmEvent(smartHome);
+            if (smartHome.getAlarmEntity().isActivated()) {
+                smartHome.getAlarmEntity().alarming();
+                smartHome.getAlarmEntity().sendSMS();
+            } else {
+                wrapeeProcessor.processEvent(smartHome, event);
+            }
         }
-
     }
 
 }

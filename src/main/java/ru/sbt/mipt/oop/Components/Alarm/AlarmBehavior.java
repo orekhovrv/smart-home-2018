@@ -4,13 +4,11 @@ import ru.sbt.mipt.oop.Components.SmartHome;
 
 public abstract class AlarmBehavior {
 
-    public boolean isIgnoringEvents() {
-        return false;
-    }
-
-    public void gotNotAlarmEvent(SmartHome smartHome) {}
-
     public void sendSMS() {
         System.out.println("Sending sms");
     }
+
+    public  boolean activate(String code) { return false; }
+
+    public  boolean deactivate(String code) { return false; }
 }

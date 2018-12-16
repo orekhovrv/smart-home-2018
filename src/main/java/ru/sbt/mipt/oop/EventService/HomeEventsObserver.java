@@ -12,10 +12,9 @@ public class HomeEventsObserver implements EventsManager {
     private Collection<EventProcessor> eventProcessors = new ArrayList<>();
 
     private Collection<EventProcessor> configureEventProcessors() {
-        registerEventProcessor(new LightsEventProcessor());
-        registerEventProcessor(new DoorEventProcessor());
-        registerEventProcessor(new HallDoorEventProcessor());
-        registerEventProcessor(new AlarmEventProcessor(Application.getUserAlarmCode()));
+        registerEventProcessor(new AlarmEventProcessorDecorator(new LightsEventProcessor()));
+        registerEventProcessor(new AlarmEventProcessorDecorator(new DoorEventProcessor()));
+        registerEventProcessor(new AlarmEventProcessorDecorator(new HallDoorEventProcessor()));
         return eventProcessors;
     }
 
@@ -30,12 +29,8 @@ public class HomeEventsObserver implements EventsManager {
         Collection<EventProcessor> eventProcessors = this.configureEventProcessors();
         while (event != null) {
             System.out.println("Got event: " + event);
-            if (!smartHome.getAlarmEntity().isIgnoringEvents()) {
-                for (EventProcessor eventProcessor : eventProcessors) {
-                    eventProcessor.processEvent(smartHome, event);
-                }
-            } else {
-                smartHome.getAlarmEntity().sendSMS();
+            for (EventProcessor eventProcessor : eventProcessors) {
+                eventProcessor.processEvent(smartHome, event);
             }
             event = RandomSensorEventProvider.getNextSensorEvent();
         }

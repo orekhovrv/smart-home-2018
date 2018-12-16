@@ -6,16 +6,11 @@ public class AlarmEntity {
     private AlarmStatus status;
     private String code = "code";
     private AlarmBehavior behavior;
-    private AlarmBehavior deactivatedAlarm;
-    private AlarmBehavior alarmedAlarm;
-    private AlarmBehavior activatedAlarm;
+
 
     public AlarmEntity(String code) {
         this.code = code;
-        this.deactivatedAlarm = new DeactivatedAlarm();
-        this.alarmedAlarm = new AlarmedAlarm();
-        this.activatedAlarm = new ActivatedAlarm();
-        this.behavior = deactivatedAlarm;
+        this.behavior = new DeactivatedAlarm(this, code);
         this.status = AlarmStatus.DEACTIVATED;
     }
 
@@ -24,30 +19,16 @@ public class AlarmEntity {
     }
 
     public boolean activate(String code) {
-        if (code.equals(this.code)) {
-            this.status = AlarmStatus.ACTIVATED;
-            behavior = activatedAlarm;
-            return true;
-        } else {
-            this.alarming();
-            return false;
-        }
+        return behavior.activate(code);
     }
 
     public boolean deactivate(String code) {
-        if (code.equals(this.code)) {
-            this.status = AlarmStatus.DEACTIVATED;
-            behavior = deactivatedAlarm;
-            return true;
-        } else {
-            this.alarming();
-            return false;
-        }
+        return behavior.activate(code);
     }
 
     public void alarming() {
         this.status = AlarmStatus.ALARM;
-        behavior = alarmedAlarm;
+        behavior = new AlarmedAlarm(this, code);
         System.out.println("AlarmEntity is alarming!!!");
     }
 
@@ -55,9 +36,15 @@ public class AlarmEntity {
         return status;
     }
 
-    public void gotNotAlarmEvent(SmartHome smartHome) { behavior.gotNotAlarmEvent(smartHome); }
-
-    public boolean isIgnoringEvents() { return behavior.isIgnoringEvents(); }
-
     public void sendSMS() { behavior.sendSMS(); }
+
+    public boolean isActivated() { return getStatus().equals(AlarmStatus.ACTIVATED) || getStatus().equals(AlarmStatus.ALARM); }
+
+    public void setStatus(AlarmStatus status) {
+        this.status = status;
+    }
+
+    public void setBehavior(AlarmBehavior behavior) {
+        this.behavior = behavior;
+    }
 }

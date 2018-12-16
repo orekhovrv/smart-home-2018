@@ -5,6 +5,9 @@ import com.coolcompany.smarthome.events.SensorEventsManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.sbt.mipt.oop.Adapters.Adapter;
+import ru.sbt.mipt.oop.Components.RemoteControl.RemoteControl;
+import ru.sbt.mipt.oop.Components.RemoteControl.RemoteControlImpl;
+import ru.sbt.mipt.oop.Components.RemoteControl.RemoteControlRegistry;
 import ru.sbt.mipt.oop.EventService.EventsManager;
 import ru.sbt.mipt.oop.HomeLoaders.FileSmartHomeLoader;
 import ru.sbt.mipt.oop.HomeLoaders.SmartHomeLoader;
@@ -25,12 +28,14 @@ public class Config {
     }
 
 
-//    @Bean
-//    RemoteControlRegistry remoteControlRegistry() {return new RemoteControlRegistry();}
-//
-//    @Bean
-//    SmartHomeRemoteControl programController() throws IOException {
-//        return  new SmartHomeRemoteControl();
-//    }
+    @Bean
+    RemoteControlRegistry remoteControlRegistry() {return new RemoteControlRegistry();}
+
+    @Bean
+    RemoteControl programController() throws IOException {
+        return  new RemoteControlImpl();
+    }
+
+
 
 }
